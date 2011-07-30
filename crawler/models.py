@@ -10,4 +10,4 @@ class CrawlerRecord(models.Model):
     http_status = models.PositiveSmallIntegerField()
     status = models.CharField(max_length=32, choices=LINK_STATUSES)
     def __unicode__(self):
-        return u'HTTP %d: %s' % (self.status, self.get_status_display)
+        return u'HTTP %d: %s' % (self.status, self.get_status_display())
