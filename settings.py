@@ -15,7 +15,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-
 TIME_ZONE = 'Europe/Kiev'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
@@ -55,7 +54,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',    
     
-    'south',    
+    'south',
+    'common',    
 )
 
 LOGGING = {
@@ -77,6 +77,8 @@ LOGGING = {
 }
 
 APPEND_SLASH = False
+
+AUTH_PROFILE_MODULE = 'common.UserProfile'
 
 try:
     from local_settings import *
