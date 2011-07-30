@@ -55,7 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',    
     
     'south',
-    'common',    
+    'accounts',    
 )
 
 LOGGING = {
@@ -78,7 +78,7 @@ LOGGING = {
 
 APPEND_SLASH = False
 
-AUTH_PROFILE_MODULE = 'common.UserProfile'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 try:
     from local_settings import *

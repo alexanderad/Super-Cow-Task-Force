@@ -9,20 +9,25 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding model 'UserProfile'
-        db.create_table('common_userprofile', (
+        db.create_table('accounts_userprofile', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
         ))
-        db.send_create_signal('common', ['UserProfile'])
+        db.send_create_signal('accounts', ['UserProfile'])
 
 
     def backwards(self, orm):
         
         # Deleting model 'UserProfile'
-        db.delete_table('common_userprofile')
+        db.delete_table('accounts_userprofile')
 
 
     models = {
+        'accounts.userprofile': {
+            'Meta': {'object_name': 'UserProfile'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'})
+        },
         'auth.group': {
             'Meta': {'object_name': 'Group'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -52,11 +57,6 @@ class Migration(SchemaMigration):
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
-        'common.userprofile': {
-            'Meta': {'object_name': 'UserProfile'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'})
-        },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
             'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
@@ -66,4 +66,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['common']
+    complete_apps = ['accounts']
