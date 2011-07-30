@@ -8,7 +8,7 @@ LINK_TYPES = (
 
 LINK_STATUSES = (
                 ('ok', u'Ok'),
-                ('temporary-unavailable', u'Temporary unavailable'),                
-                ('disappeared', u'Disappeared'),
+                ('temporary-unavailable', u'Temporary unavailable'),
+                ('muted', u'Muted'),
                 ('dead', 'Dead'),
 )
