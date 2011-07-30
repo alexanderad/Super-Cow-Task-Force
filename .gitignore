@@ -1,3 +1,4 @@
 *.pyc
 *~
 *.orig
+local_settings.py
