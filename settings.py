@@ -54,8 +54,14 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',    
     
+    # requirements
     'south',
-    'accounts',    
+    
+    # linky apps
+    'accounts',
+    'tasks',
+    'crawler',
+    'dashboard',    
 )
 
 LOGGING = {
