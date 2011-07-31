@@ -58,29 +58,22 @@ h1.tasks-heading {
 	font-weight:normal;
 	border-left:1px solid #ddd;
 }
-
 .task-wrapper div.task-status {
-		width:187px;
+	width:187px;
 	border-radius: 0 4px 4px 0;
 	-moz-border-radius:0 4px 4px 0;
 	-webkit-border-radius:0 4px 4px 0;
 }
-
 .task-wrapper div.task-status.dead-found {
 	background:#F33;
-
 }
 .task-wrapper div.task-status.dead-found .tabcontent {
 	color:#fff;
-
 }
-
-
-.task-wrapper div.task-status.ok{
+.task-wrapper div.task-status.ok {
 	color:#fff;
 	background:#0C0;
 }
-
 .delete-task {
 	display:block;
 	height:62px;
@@ -136,22 +129,26 @@ h1.tasks-heading {
 .statusbar div.task-inactive {
 	background: transparent url(../images/link-status.png) 0px -42px repeat-x;
 }
-.task-container {margin-bottom:20px;}
-
+.task-container {
+	margin-bottom:20px;
+}
 .task-container .results-table td.link-url {
 	width:615px;
 }
 td.watch-icon {
 	width:45px;
+	cursor:pointer;
 }
-.watch-icon div.watch-on {
+.watch-icon div {
+	display:block;
 	height:22px;
 	width:24px;
+	margin:0 auto;
+}
+.watch-icon div.watch-on {
 	background: transparent url(../images/eye.png) top left no-repeat;
 }
 .watch-icon div.watch-off {
-	height:22px;
-	width:24px;
 	background: transparent url(../images/eye.png) bottom left no-repeat;
 }
 .dontwatch {
@@ -172,15 +169,13 @@ td.watch-icon {
 	color:#09698f;
 }
 .dontwatch span {
-	
 	padding-bottom:2px;
 	border-bottom:1px dashed #09698f;
 }
 .dontwatch:hover {
 	background-color:rgba(255,255,255,0.5);
 	color: #06C;
-	}
-
+}
 .lastcheck-time {
 	display:block;
 	height:30px;
@@ -194,11 +189,13 @@ ul.link-params {
 .link-data {
 	display:block;
 	width:100%;
-} 
-
-ul.link-params li.link-warning {color:#F90}
-
-.ui-tooltip {font-size:16px;} 
-
-.task-container .link-text span {cursor:pointer;}
-
+}
+ul.link-params li.link-warning {
+	color:#F90
+}
+.ui-tooltip {
+	font-size:16px;
+}
+.task-container .link-text span {
+	cursor:pointer;
+}
