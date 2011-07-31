@@ -62,6 +62,14 @@ def get_link_type(soup_name):
     """ convert soup name to linky link type """
     return SOUP_NAMES2LINK_TYPES.get(soup_name)
 
+def get_anchor(l):
+    if l.text:
+        return l.text
+    for k in ["title", "alt"]:
+        if l.has_key(k):
+            return l[k]
+    return u'-'
+
 #FIXME
 def get_full_link(host, link):
     """ get full link """
@@ -119,7 +127,7 @@ class Crawler:
                     self.q.put({"link_target": get_link_target(self.host, link),
                                 "link_type": get_link_type(l.name),                                
                                 "full_link": get_full_link(self.host, link),
-                                "link_anchor": l.text if l.text else u'',
+                                "link_anchor": get_anchor(l),
                                 "link": link,
                     })
                     all_links_filtered.append(link)

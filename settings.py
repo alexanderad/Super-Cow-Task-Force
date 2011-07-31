@@ -58,10 +58,11 @@ INSTALLED_APPS = (
     'south',
     
     # linky apps
+    'tags',
     'accounts',
     'tasks',
     'crawler',
-    'dashboard',    
+    'dashboard',
 )
 
 LOGGING = {

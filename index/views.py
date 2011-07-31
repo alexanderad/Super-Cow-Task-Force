@@ -25,8 +25,8 @@ def quick_test(request):
         # lets check
         c = Crawler(url_to_test)
         results = c.run()
-        from pprint import pprint
-        pprint(results)
+        #from pprint import pprint
+        #pprint(results)
 
     if form is None:
         initial = {}

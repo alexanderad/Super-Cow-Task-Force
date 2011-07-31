@@ -1,4 +1,5 @@
 {% extends "base-template.html" %}
+{% load linky_tags %}
 {% block bodytag %}<body class="result">{% endblock %}
 {% block content %}
     <div class="submit-form">
@@ -12,20 +13,28 @@
     </div>
     {% if not results %}
         <div class="message warning">Please, enter URL above to check</div>
-    {% else %}  
-        <h1 class="int-links-heading">Internal links</h1>
-        {% for link_type, links in results.internal.items %}
-            <h2>{{ link_type }}</h2>
-            <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
-                {% for l in links %}
-                    <tr class="{% cycle "odd" "even" %} status-error">
-                        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
-                        <td class="link-text"><span>{{ l.link_anchor }}</span> {{ l.verbose }}</td>
-                        <td class="link-url"><a href="{{ l.full_link }}" target="_blank">{{ l.link }}</a></td>
-                    </tr>
+    {% else %}
+        {% ifequal results.error 0 %}
+            {% for target, target_links in results.items %}
+                {% ifequal target "internal" %}<h1 class="int-links-heading">Internal links</h1>{% endifequal %}
+                {% ifequal target "external" %}<h1 class="ext-links-heading">External links</h1>{% endifequal %}
+                {% for link_type, links in target_links.items %}
+                    {% if links %}
+                        <h2>{{ link_type|link_type_display }}</h2>
+                        <table class="results-table" cellpadding="1px" cellspacing="1px">
+                            {% for l in links %}
+                                <tr class="{% cycle "odd" "even" %} status-error">
+                                    <td class="link-status-icon"><img {% if l.verbose %}alt="{{ l.verbose }}"{% endif %} src="{{ MEDIA_URL }}/images/icon-{{ l|get_link_status_icon }}.png" width="16" height="16" /></td>
+                                    <td class="link-text"><span>{{ l.link_anchor|default:"no title" }}</span></td>
+                                    <td class="link-url"><a href="{{ l.full_link }}" target="_blank">{{ l.link }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}    
                 {% endfor %}
-            </table>
-        {% endfor %}
-    
+            {% endfor %}
+        {% else %}
+            <div class="message warning">Linky can't access that URL :-(</div>
+        {% endifequal %}
     {% endif %} {# end of 'if not results' #}
 {% endblock %}
