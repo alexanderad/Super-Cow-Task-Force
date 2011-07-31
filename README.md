@@ -20,3 +20,5 @@
 
 #### TODO
 * `crontab` script that will check user's pages/sites at given intervals and notify in case of problems
+* fully functional dashboard & settings tabs
+* allow user to add `sitemap.xml` of site that needs to be checked
