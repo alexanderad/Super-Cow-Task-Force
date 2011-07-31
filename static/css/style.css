@@ -110,13 +110,14 @@ ul.topmenu li a:hover {
 	font-weight:bold;
 	font-size:14px;
 }
+
 .front .helptext {
 	font-weight:normal;
 	font-size:18px;
 }
 .content {
 	width:960px;
-	margin:0 auto;
+	margin:20px auto 0;
 	min-height:100%;
 }
 /* front-form */

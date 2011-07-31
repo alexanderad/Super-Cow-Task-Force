@@ -1,0 +1,47 @@
+{% extends "base-template.html" %}
+{% load linky_tags %}
+{% block bodytag %}<body class="result">{% endblock %}
+{% block content %}
+    <div class="submit-form">
+      <form action="{% url index.views.quick_test %}" method="POST">
+        <div class="link-input-wrapper">
+            {% csrf_token %}
+          {% if form.url.errors %}{{ form.url.errors }}{% endif %}{{ form.url }}
+          <input name="check" type="submit" value="Check link"  class="link-button" />
+        </div>
+      </form>
+    </div>
+    {% if not results %}
+        <div class="message warning">Please enter URL above to check</div>
+    {% else %}
+        {% ifequal results.error 0 %}
+            {% for category, category_css_class, category_items_dict, category_has_links in results.results_by_category %}                 
+                {% if category_has_links %}    
+                    <h1 class="{{ category_css_class }}-links-heading">{{ category }}</h1>
+                    <div class="clearfloat"></div>
+                    {% for link_type, links in category_items_dict.items %}
+                        {% if links %}
+                            <h2>{{ link_type|link_type_display }}</h2>
+                            <table class="results-table" cellpadding="1px" cellspacing="1px">
+                                {% for l in links %}
+                                    <tr class="{% cycle "odd" "even" %} status-error">
+                                        <td class="link-status-icon"><img src="{{ MEDIA_URL }}/images/icon-{{ l|get_link_status_icon }}.png" width="16" height="16" /></td>
+                                        <td class="link-text">
+                                            <span>{{ l.link_anchor|default:"no title" }}</span>
+                                            {% if l.verbose %}<div><small style="color: darkred">{{ l.verbose }}</small></div>{% endif %}
+                                        </td>
+                                        <td class="link-url"><a href="{{ l.full_link }}" target="_blank">{{ l.link|link_shortener }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}                    
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="message warning">
+                Unfortunately Linky can't access that URL (or it takes to much time to fetch it) :-(                
+            </div>
+        {% endifequal %}
+    {% endif %} {# end of 'if not results' #}
+{% endblock %}

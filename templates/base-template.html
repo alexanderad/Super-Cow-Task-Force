@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <link href="{{ MEDIA_URL }}/css/style.css" rel="stylesheet" type="text/css" />
+{% block additional_css %}{% endblock %}
 
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}/js/login.js"></script>
@@ -43,14 +44,14 @@
   {% if user.is_authenticated %}
     <ul class="topmenu">
       <li><a href="{% url accounts.views.account_logout %}">logout</a></li>
-      <li><a href="">dashboard</a></li>
-      <li><a href="">settings</a></li>
-      <li class="last"><a href="">how it works</a></li>
+      <li><a href="#">dashboard</a></li>
+      <li><a href="#">settings</a></li>
+      <li class="last"><a href="{% url index.views.how_it_works %}">how it works</a></li>
     </ul>
   {% else %}      
     <ul class="topmenu">      
       <li><a class="login">log in</a></li>
-      <li class="last"><A>how it works</A></li>
+      <li class="last"><a href="{% url index.views.how_it_works %}">how it works</a></li>
     </ul>
   {% endif %}  
   </div>
@@ -71,7 +72,7 @@
   <div class="footer">
     <ul class="botmenu">
       <li class="first">
-      <a>how it works</a></li>
+      <a href="{% url index.views.how_it_works %}">how it works</a></li>
       {% if not user.is_authenticated %}
           <li><a class="login">log in</a></li>
           <li><a class="login register">register</a></li>      

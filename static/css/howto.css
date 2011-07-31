@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+
+.content.howto h2 {
+	font-size:20px;
+	}
+
+.howto-img {
+	display:block;
+	text-align:center;
+	}

@@ -1,0 +1,14 @@
+{% extends "base-template.html" %}
+{% block toplogo %}{% endblock %}
+{% block content %}
+    <div class="submit-form"> <span class="slogan">Keep your links alive!</span>
+      <form action="{% url index.views.index %}" method="POST">
+          {% csrf_token %}
+        <div class="helptext">Enter URL to find links:</div>
+        <div class="link-input-wrapper">
+            {% if form.url.errors %}{{ form.url.errors }}{% endif %}{{ form.url }}
+          <input name="check" type="submit" value="Check link" class="link-button" />
+        </div>
+      </form>
+    </div>
+{% endblock %}

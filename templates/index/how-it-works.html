@@ -1,0 +1,29 @@
+{% extends "base-template.html" %}
+{% block additional_css %}<link href="{{ MEDIA_URL }}/css/howto.css" rel="stylesheet" type="text/css" />{% endblock %}
+{% block content %}
+  <div class="content howto"> 
+              
+        <p> <em>- Look what I've found! It's a wonderful tutorial on how to build a helper robot from your old fridge and toster! Ok... It's easy - all we need is the blueprint. Click... WTF &quot;Page you are looking for is not found&quot;!? Sh*t... Now I have nothing better to do but build a giant killer droid.</em></p>
+        <p>See - broken links are pure evil. But how do we fight them? Internet is constantly changing, websites come and go and it isn't easy to keep track all of the data you link to. This is what <strong>Linky</strong> comes handy for! </p>
+        <p>Our service keeps information about your site links, notifies you about changes and problems with them.        </p>
+<h1>How it works?</h1>
+        <h2>Step 1</h2>
+        <p>Enter URL of the page you want to check links on.</p>
+        <p class="howto-img"><img src="{{ MEDIA_URL }}/images/howto1.png" width="660" height="130" alt="step 1" /></p>
+        <h2>Step 2</h2>
+        <p>Linky finds all of the links contained on this page.</p>
+        <p class="howto-img"><img src="{{ MEDIA_URL }}/images/howto2.png" width="658" height="214" alt="step 2" /></p>
+        <p>when done you can create a new account or add the results to an existing account to save your data.</p>
+        <p class="howto-img"><img src="{{ MEDIA_URL }}/images/howto3.png" width="657" height="77" alt="step 2" /></p>
+        <h2>Step 3</h2>
+        <p>That's all. Now your page is saved to your account and<strong> Linky </strong>keeps an eye on it :-)</p>
+        <p class="howto-img"><img src="{{ MEDIA_URL }}/images/howto4.png" width="659" height="181" alt="step 3" /></p>
+        <h2>Step 4, not required</h2>
+        <p>In case there are just TOO MANY links on your page, you can check only some of the link ltypes (e.g. web pages, images, css files) or carry out the checks less often. </p>
+        <p class="howto-img"><img src="{{ MEDIA_URL }}/images/howto5.png" width="670" height="241" alt="step 4" /></p>
+        <p>We are always glad to see you here at Linky, but there's an option to avoid visiting the site daily to check you link status - simply set up e-mail notifications.</p>
+        <p class="howto-img"><img src="{{ MEDIA_URL }}/images/howto7.png" width="670" height="220" alt="step 4" /></p>
+        <h2>That's it! <a href="{% url index.views.index %}">Check your links right now</a>!</h2>
+  </div>
+  <!-- end content --> 
+{% endblock %}

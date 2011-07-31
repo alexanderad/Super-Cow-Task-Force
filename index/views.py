@@ -28,15 +28,15 @@ def quick_test(request):
         results = {"error": raw_results["error"],
                    "results_by_category": ((u'External links', 'ext', raw_results["external"], len(raw_results["external"]["web"]) + len(raw_results["external"]["img"])),
                                            (u'Internal links', 'int', raw_results["internal"], len(raw_results["internal"]["web"]) + len(raw_results["internal"]["img"])),
-                                           (u'System', 'system', raw_results["system"], len(raw_results["external"]["css"]) + len(raw_results["external"]["js"])),
-            )           
+                                           (u'System', 'system', raw_results["system"], len(raw_results["system"]["css"]) + len(raw_results["system"]["js"])),
+            )
         }
     if form is None:
         initial = {}
         if url_to_test:
             initial.update({"url": url_to_test})
         form = QuickTestCheckForm(initial=initial)
-    return render_to_response('quick-test.html', {"form": form, "results": results}, context_instance=RequestContext(request))
+    return render_to_response('index/quick-test.html', {"form": form, "results": results}, context_instance=RequestContext(request))
 
 def index(request):
     """ index page """
@@ -49,4 +49,8 @@ def index(request):
             return HttpResponseRedirect(reverse('index.views.quick_test'))
     if form is None:
         form = QuickTestCheckForm()
-    return render_to_response('index.html', {"form": form}, context_instance=RequestContext(request))
+    return render_to_response('index/index.html', {"form": form}, context_instance=RequestContext(request))
+
+def how_it_works(request):
+    """ how it works """
+    return render_to_response('index/how-it-works.html', {}, context_instance=RequestContext(request))
