@@ -2,6 +2,9 @@
 import re
 import urllib2
 from BeautifulSoup import BeautifulSoup as Soup
+from threading import Thread
+from Queue import Queue
+
 #from crawler.constants import HTTP_RESPONSE_CODES
 from BaseHTTPServer import BaseHTTPRequestHandler
 
@@ -37,18 +40,19 @@ def perform_head_request(url):
         return {"http_status": response.getcode(), 
                 "size": response.headers["Content-Length"] if response.headers.has_key("Content-Length") else 0}
     except urllib2.URLError, e:
-        pass
+        return {"http_status": 404}        
     return {}
 
 def perform_get_request(url):
     """ try to get <title></title> contents of url """
+    return {}
     try:
         response = urllib2.urlopen(url)        
         title = Soup(response.read(1024)).find('title')
         return {"http_status": response.getcode(),
                 "title": title.text if title else u''}
     except urllib2.URLError, e:
-        pass
+        return {"http_status": 404}
     return {}        
 
 def get_link_type(soup_name):
@@ -62,28 +66,27 @@ def get_full_link(host, link):
          return u'http://%s%s' % (host, '/' + link if not link.startswith("/") else link)
     return link
 
-def check_link(host, soup_element, link):
-    """ check link """
-    full_link = get_full_link(host, link)
-    data = {"link": link, "full_link": full_link}
-    if 'a' == soup_element.name:
-        data.update(perform_get_request(full_link))
-        data.update({"link_anchor": soup_element.text})
-    else:
-        data.update(perform_head_request(full_link))
-    print data
-    return data
-
 class Crawler:
     """ Page crawler """
-    def __init__(self, page_url, link_types=None, task_instance=None):
+    def __init__(self, page_url, link_types=None):
         self.url = page_url
         self.link_types = link_types or 'web css js img'
-        self.task = task_instance
+        self.results = {'error': 0, 'internal': {'web': [], 'css': [], 'js': [], 'img': []}, 'external': {'web': [], 'css': [], 'js': [], 'img': []}}
+        self.q = Queue(25)        
+    
+    def worker(self):
+        while True:
+            l = self.q.get()
+            self.check_link(l)            
+            self.q.task_done() 
+        
+    def check_link(self, data):
+        """ check link """
+        data.update(perform_head_request(data["full_link"]))
+        self.results[data["link_target"]][data["link_type"]].append(data)            
 
-    def parse(self):
-        """ get page """
-        results = {'error': 0, 'internal': {}, 'external': {}}
+    def run(self):
+        """ get page """        
         request = urllib2.Request(self.url)
         try:
             response = urllib2.urlopen(request)
@@ -94,32 +97,35 @@ class Crawler:
 
         http_status = response.getcode()
         if http_status in [200]:
-            host = request.host
-            checked_links = []
-            for l in Soup(page_data).findAll(['a', 'img', 'script', 'link']):
-                # find all links on a page
+            # run threads
+            for i in range(0, 25):
+                t = Thread(target=self.worker)
+                t.daemon = True
+                t.start()
+
+            self.host = request.host
+            all_links = Soup(page_data).findAll(['a', 'img', 'script', 'link'])
+            all_links_filtered = []
+            for l in all_links:
                 link = None
                 if l.name in ['a', 'link'] and l.has_key('href'):
                     link = l["href"].strip()
                 if l.name in ['img', 'script'] and l.has_key('src'):
                     link = l["src"].strip()
-                if link and link not in checked_links:
-                    # external or internal?
-                    link_target = get_link_target(host, link)
-                    link_type = get_link_type(l.name)
-                    if not results[link_target].has_key(link_type):
-                        results[link_target].update({link_type: []})
-                    results[link_target][link_type].append(check_link(host, l, link))
-                    checked_links.append(link)
+                if link and link not in all_links_filtered:                    
+                    self.q.put({"link_target": get_link_target(self.host, link),
+                                "link_type": get_link_type(l.name),
+                                "full_link": get_full_link(self.host, link),
+                                "link": link,
+                    })
+                    all_links_filtered.append(link)
+            self.q.join()           
         else:
-            results = {'error': response.code}
-        return results
+            self.results = {'error': response.code}
+        return self.results
 
-    def run(self):
-        """ run crawler """
-        from pprint import pprint
-        pprint(self.parse()) 
-
-
-c = Crawler('http://darednaxella.livejournal.com') 
-c.run()
+c = Crawler('http://djangodash.com') 
+results = c.run()
+from pprint import pprint
+pprint(results)
+#print len(results["internal"]["web"]), len(results["external"]["web"])
