@@ -24,10 +24,13 @@ def quick_test(request):
     if url_to_test:
         # lets check
         c = Crawler(url_to_test)
-        results = c.run()
-        #from pprint import pprint
-        #pprint(results)
-
+        raw_results = c.run()
+        results = {"error": raw_results["error"],
+                   "results_by_category": ((u'External links', 'ext', raw_results["external"]),
+                                           (u'Internal links', 'int', raw_results["internal"]),
+                                           (u'System', 'system', raw_results["system"]),
+            )           
+        }
     if form is None:
         initial = {}
         if url_to_test:

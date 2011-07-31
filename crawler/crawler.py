@@ -10,7 +10,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler
 from django.utils.html import strip_tags, strip_entities
 
 # set timeout
-socket.setdefaulttimeout(1.2)
+socket.setdefaulttimeout(5)
 
 HTTP_RESPONSE_CODES = BaseHTTPRequestHandler.responses
 
@@ -27,7 +27,7 @@ class HEADRequest(urllib2.Request):
 def get_link_target(host, link):
     """ figure out if link is internal or external """
     link_host = get_host(link)    
-    return 'internal' if not link_host or link_host == host else 'external'
+    return 'internal' if not link_host or link_host == host else 'external' 
 
 def get_host(link):
     """ return host of link if possible """
@@ -42,24 +42,23 @@ def perform_head_request(url):
         response = urllib2.urlopen(HEADRequest(url))
         return {"http_status": response.getcode(), 
                 "size": response.headers["Content-Length"] if response.headers.has_key("Content-Length") else 0}
-    #except urllib2.URLError, e:
+    except urllib2.HTTPError, e:
+        return {"http_status": getattr(e, "code", -1), "verbose": u'%s' % e}            
     except Exception, e:
-        print e
         return {"http_status": -1, "verbose": u'%s' % e}        
-    return {}
 
-def perform_get_request(url):
-    """ try to get <title></title> contents of url """
-    return {}
-    try:
-        response = urllib2.urlopen(url)        
-        title = Soup(response.read(1024)).find('title')
-        return {"http_status": response.getcode(),
-                "title": title.text if title else u''}
-    except urllib2.URLError, e:
-        #return {"http_status": 404}
-        pass
-    return {}        
+#def perform_get_request(url):
+    #""" try to get <title></title> contents of url """
+    #return {}
+    #try:
+        #response = urllib2.urlopen(url)        
+        #title = Soup(response.read(1024)).find('title')
+        #return {"http_status": response.getcode(),
+                #"title": title.text if title else u''}
+    #except urllib2.URLError, e:
+        ##return {"http_status": 404}
+        #pass
+    #return {}        
 
 def get_link_type(soup_name):
     """ convert soup name to linky link type """
@@ -91,20 +90,29 @@ class Crawler:
     """ Page crawler """
     def __init__(self, page_url, link_types=None):
         self.url = page_url
-        self.link_types = link_types or 'web css js img'
-        self.results = {'error': 0, 'internal': {'web': [], 'css': [], 'js': [], 'img': []}, 'external': {'web': [], 'css': [], 'js': [], 'img': []}}
-        self.q = Queue(50)        
-    
+        self.link_types = link_types or 'web css js img' #TODO
+        self.results = {'error': 0, 'external': {'web': [], 
+                                                 'img': []}, 
+                                    'internal': {'web': [], 
+                                                 'img': []},
+                                    'system': {'css': [],
+                                               'js': []},
+        }
+        self.q = Queue(50)
+
     def worker(self):
         while True:
             l = self.q.get()
-            self.check_link(l)            
+            self.check_link(l)
             self.q.task_done() 
-        
+
     def check_link(self, data):
         """ check link """
         data.update(perform_head_request(data["full_link"]))
-        self.results[data["link_target"]][data["link_type"]].append(data)            
+        if data["link_type"] in ["web", "img"]:
+            self.results[data["link_target"]][data["link_type"]].append(data)
+        else:
+            self.results["system"][data["link_type"]].append(data)
 
     def run(self):
         """ get page """        
@@ -131,9 +139,17 @@ class Crawler:
                 link = None
                 if l.name in ['a', 'link'] and l.has_key('href'):
                     link = l["href"].strip()
+                    #TODO: favicons, rss/atom feeds, etc 
+                    if 'link' == l.name and (not l.has_key("type") or l["type"] != "text/css"):
+                        continue
                 if l.name in ['img', 'script'] and l.has_key('src'):
                     link = l["src"].strip()
-                if link and link not in all_links_filtered:                    
+                if link and link not in all_links_filtered:
+
+                    #HACK
+                    if link.startswith("//"):
+                        link = u'http:' + link
+
                     self.q.put({"link_target": get_link_target(self.host, link),
                                 "link_type": get_link_type(l.name),                                
                                 "full_link": get_full_link(self.host, link),

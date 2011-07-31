@@ -15,4 +15,12 @@ LINK_STATUSES = (
                 ('dead', 'Dead'),
 )
 
+STATUS2ICON = {404: 'error',
+               403: 'warning',
+               200: 'ok',
+               500: 'error',
+               -1: 'error',
+}
+
+
 LINK_STATUSES_DICT = dict(LINK_STATUSES)

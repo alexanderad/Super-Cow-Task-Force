@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import template
-from tasks.constants import LINK_TYPES_DICT
+from tasks.constants import LINK_TYPES_DICT, STATUS2ICON
 
 register = template.Library()
 
@@ -11,8 +11,9 @@ def link_type_display(link_type):
     
 @register.filter
 def get_link_status_icon(l):
-    if l["http_status"] == 200:
-        return 'ok'
+    code = l["http_status"]
+    if STATUS2ICON.has_key(code):
+        return STATUS2ICON[code]
     return 'warning'
 
 @register.filter

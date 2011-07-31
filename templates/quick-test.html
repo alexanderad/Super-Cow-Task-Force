@@ -12,13 +12,13 @@
       </form>
     </div>
     {% if not results %}
-        <div class="message warning">Please, enter URL above to check</div>
+        <div class="message warning">Please enter URL above to check</div>
     {% else %}
         {% ifequal results.error 0 %}
-            {% for target, target_links in results.items %}
-                {% ifequal target "internal" %}<h1 class="int-links-heading">Internal links</h1>{% endifequal %}
-                {% ifequal target "external" %}<h1 class="ext-links-heading">External links</h1>{% endifequal %}
-                {% for link_type, links in target_links.items %}
+            {% for category, category_css_class, category_items_dict in results.results_by_category %}                 
+                <h1 class="{{ category_css_class }}-links-heading">{{ category }}</h1>
+                <div class="clearfloat"></div>
+                {% for link_type, links in category_items_dict.items %}
                     {% if links %}
                         <h2>{{ link_type|link_type_display }}</h2>
                         <table class="results-table" cellpadding="1px" cellspacing="1px">
@@ -27,17 +27,20 @@
                                     <td class="link-status-icon"><img src="{{ MEDIA_URL }}/images/icon-{{ l|get_link_status_icon }}.png" width="16" height="16" /></td>
                                     <td class="link-text">
                                         <span>{{ l.link_anchor|default:"no title" }}</span>
-                                        {% if l.verbose %}<div><small>{{ l.verbose }}</small></div>{% endif %}
+                                        {% if l.verbose %}<div><small style="color: darkred">{{ l.verbose }}</small></div>{% endif %}
                                     </td>
                                     <td class="link-url"><a href="{{ l.full_link }}" target="_blank">{{ l.link|link_shortener }}</a></td>
                                 </tr>
                             {% endfor %}
                         </table>
-                    {% endif %}    
+                    {% endif %}                    
                 {% endfor %}
+                
             {% endfor %}
         {% else %}
-            <div class="message warning">Linky can't access that URL :-(</div>
+            <div class="message warning">
+                Unfortunately Linky can't access that URL (or it takes to much time to fetch it) :-(                
+            </div>
         {% endifequal %}
     {% endif %} {# end of 'if not results' #}
 {% endblock %}
