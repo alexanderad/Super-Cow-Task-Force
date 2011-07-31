@@ -18,52 +18,68 @@
   <div class="close">x</div>
   <span class="login-tab tab">Log in</span><span class="reg-tab tab">Register</span>
   <form class="login-f" id="id_login-f" id="id_login_form">    
-  <div class="fieldwrap"><input name="" type="text" class="f-text mail" id="id_login_email" /><label>Email</label> </div>
-    <div class="fieldwrap">  <input name="" type="password" class="f-text pass"  id="id_login_password" /><label>Password</label></div>
+  <div class="fieldwrap"><input name="email" type="text" class="f-text mail" id="id_login_email" /><label>Email</label> </div>
+    <div class="fieldwrap">  <input name="password" type="password" class="f-text pass"  id="id_login_password" /><label>Password</label></div>
   <div class="fieldwrap">  <input type="button" class="logbut" id="id_login_button" value="login" /></div>
   </form>
   <form class="reg-f" id="id_reg-f">
   
-    <div class="fieldwrap">   <input name="" type="text" class="f-text regmail" /><label>Email</label></div>
-   <div class="fieldwrap">   <input name="" type="password" class="f-text regpass" /><label>Password</label></div>
-     <div class="fieldwrap">  <input name="" type="password" class="f-text regdoublepass" /><label>Repeat password</label></div>
-  <div class="fieldwrap"><input name="" type="button" class="regbut" value="register" /> </div>
+    <div class="fieldwrap">   <input name="" id="id_registration_email" type="text" class="f-text regmail" /><label>Email</label></div>
+   <div class="fieldwrap">   <input name="" id="id_registration_password" type="password" class="f-text regpass" /><label>Password</label></div>
+     <div class="fieldwrap">  <input name="" id="id_registration_password_verification" type="password" class="f-text regdoublepass" /><label>Repeat password</label></div>
+  <div class="fieldwrap"><input name="" type="button" class="regbut" id="id_registration_button" value="register" /> </div>
   
   </form>
   
    </div>
   
 <div class="wrapper"> 
-  <!-- header -->
+  <!-- header -->   
   <div class="header">
     {% block toplogo %}
         <div class="top-logo"><a href="{% url index.views.index %}"><img src="{{ MEDIA_URL }}/images/logo-small.png" width="149" height="69" alt="Linky" /></a></div> 
     {% endblock %}
-   <span class="hidden">{% if user.is_authenticated %}</span>
-    <ul class="topmenu hidden">
-      <li>how in works </li>
-      <li>settings</li>
+    
+   
+    
+  {% if user.is_authenticated %}
+    <ul class="topmenu">
+      <li>logout</li>
       <li>dashboard</li>
-      <li class="last">logout</li>
+      <li>settings</li>
+      <li class="last">how in works </li>
     </ul>
-    <span class="hidden"> {% else %}</span>
+  {% else %}      
     <ul class="topmenu">
       <li><A>how it works</A></li>
       <li class="last"><a class="login">log in</a></li>
     </ul>
-    <span class="hidden"> {% endif %}</span> </div>
+  {% endif %}  
+  </div>
   <!-- end header --> 
   <!-- content -->
-  <div class="content">{% block content %}{% endblock %}</div>
+  
+  <div class="content">
+      <!-- user header -->
+      {% if user.is_authenticated %}<div class="user-mail-block">you are logged in as: <span class="user-mail">{{ user.username }}</span></div>{% endif %}
+      <!-- user header -->
+      {% block content %}{% endblock %}
+  </div>
   
   <!-- end content --> 
+  
   
   <!-- footer -->
   <div class="footer">
     <ul class="botmenu">
-      <li class="first"><a>how it works</a></li>
-      <li><a class="login">log in</a></li>
-      <li><a class="login register">register</a></li>
+      <li class="first">
+      <a>how it works</a></li>
+      {% if not user.is_authenticated %}
+          <li><a class="login">log in</a></li>
+          <li><a class="login register">register</a></li>
+      {% else %}    
+          <li><a href="{% url accounts.views.logout %}">logout</a></li>
+      {% endif %}    
       <li class="github last"><a href="http://github.com/">github</a></li>
     </ul>
     <span class="copyright">&copy;2011<br />

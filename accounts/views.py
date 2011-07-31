@@ -5,11 +5,41 @@ from django.shortcuts import render_to_response
 from django import forms
 import simplejson as json
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from accounts.models import UserProfile
 
 class LoginForm(forms.Form):
-    """ форма входа """
+    """ login form """
     email = forms.EmailField(required=True)
     password = forms.CharField(required=True)
+
+class RegistrationForm(forms.Form):
+    """ registration form """
+    email = forms.EmailField(required=True)
+    password = forms.CharField(required=True, min_length=5)
+    password_verification = forms.CharField(required=True)    
+
+def json_register(request):
+    """ ajax json register """
+    data = {}
+    if "POST" == request.method:
+        form = RegistrationForm(request.POST)
+        if form.is_valid():            
+            if form.cleaned_data["password"] != form.cleaned_data["password_verification"]:
+                data = {"error": 2, "non_field_error": "Passwords do not match."}
+            elif User.objects.filter(username=form.cleaned_data["email"]).count() > 0:
+                data = {"error": 3, "non_field_error": "Account already exists."}
+            else:
+                # everything is ok
+                u = User.objects.create_user(form.cleaned_data["email"], form.cleaned_data["email"], form.cleaned_data["password"])
+                UserProfile.objects.create(user=u)
+                # authenticate immediately
+                u = authenticate(username=form.cleaned_data["email"], password=form.cleaned_data["password"])
+                login(request, u)
+                data = {"error": 0}
+        else:            
+            data = {"error": 1, "form_errors": form.errors}
+    return HttpResponse(json.dumps(data, ensure_ascii=False), mimetype="application/json")
 
 def json_login(request):
     """ ajax json login """
@@ -22,7 +52,7 @@ def json_login(request):
                 login(request, u)
                 data = {"error": 0}
             else:
-                data = {"error": 403, "non_field_error": "Invalid username and/or password"}
+                data = {"error": 403, "non_field_error": "Invalid username and/or password."}
         else:            
             data = {"error": 1, "form_errors": form.errors}
     return HttpResponse(json.dumps(data, ensure_ascii=False), mimetype="application/json")

@@ -87,19 +87,23 @@ jQuery(document).ready(function ($) {
 
     });
     
+    
+    //FIXME: dry me
+    
+    var errorListTimeout; 
+    
     $("#id_login_button").click(function() {        
         var request_data = {email: $("#id_login_email").val(),
                     password: $("#id_login_password").val(), 
                     csrfmiddlewaretoken: getCookie('csrftoken'),
         };
-        $.post('/accounts/json/login', request_data, function(response_data) {                           
+        $.post('/accounts/json/login', request_data, function(response_data) {            
             switch(response_data.error) {
                 case 1:
                     // validation errors
                     for(v in response_data.form_errors) {
                         $("#id_login_" + v).before('<ul class="errorlist"><li>' + response_data.form_errors[v] + '</li></ul>');
-                    };
-                    setTimeout(function() { $(".errorlist").fadeOut() }, 3500);
+                    };                    
                     break;
                     
                 case 403:
@@ -112,6 +116,40 @@ jQuery(document).ready(function ($) {
                     $(location).attr('href', '/');
                     break;
             };
+            clearTimeout(errorListTimeout);
+            errorListTimeout = setTimeout(function() { $(".errorlist").fadeOut() }, 3500);
+        });        
+    });
+    
+    $("#id_registration_button").click(function() {        
+        var request_data = {email: $("#id_registration_email").val(),
+                            password: $("#id_registration_password").val(),
+                            password_verification: $("#id_registration_password_verification").val(), 
+                            csrfmiddlewaretoken: getCookie('csrftoken'),
+        };
+        $.post('/accounts/json/register', request_data, function(response_data) {
+            console.log(response_data);
+            $(".errorlist").remove();
+            switch(response_data.error) {
+                case 1:
+                    // validation errors
+                    for(v in response_data.form_errors) {
+                        $("#id_registration_" + v).before('<ul class="errorlist"><li>' + response_data.form_errors[v] + '</li></ul>');
+                    };
+                    break;
+                
+                case 2: // passwords mismatch
+                case 3: // username is taken
+                    $("#id_registration_email").before('<ul class="errorlist"><li>' + response_data.non_field_error + '</li></ul>');
+                    break;
+                    
+                case 0:
+                    $('.close').click();
+                    $(location).attr('href', '/');
+                    break;    
+            };
+            clearTimeout(errorListTimeout);
+            errorListTimeout = setTimeout(function() { $(".errorlist").fadeOut() }, 3500);
         });        
     });
 });
