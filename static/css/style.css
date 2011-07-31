@@ -1,0 +1,327 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* structure */
+
+body {
+	color: #000;
+	background: #f4f4f4 url(../images/bg.jpg);
+	margin:0;
+	padding:0;
+	font-size:16px;
+	font-family: 'Ubuntu', sans-serif;
+}
+a {
+	color: #333;
+}
+a:hover {
+	color:#555;
+}
+:focus, :hover, :active {
+	outline:none;
+	-moz-outline:none;
+}
+.wrapper {
+	background:transparent url(../images/top.png) top left repeat-x;
+	position:absolute;
+	top:0;
+	min-height:600px;
+	height:100%;
+	width:100%;
+}
+
+
+/* header */
+
+.header {
+	width:960px;
+	margin:0 auto;
+	background:transparent url(../images/divider-hor.png) bottom center no-repeat;
+	height:65px;
+}
+ul.topmenu {
+	display:block;
+	font-weight:bold;
+	float:right;
+	margin-top:20px;
+}
+ul.topmenu.hidden {
+	display:none;
+}
+.hidden {
+	display:none;
+	height:0;
+}
+ul.topmenu li {
+	list-style:none;
+	display:block;
+	float:left;
+	padding:8px 30px;
+	background: transparent url(../images/divider-menu.png) center right no-repeat;
+	text-shadow: 0px 1px 1px #fff;
+}
+ul.topmenu li.last {
+	margin-right:0;
+	background-image:none;
+}
+ul.topmenu li a {
+	text-decoration:none;
+	padding:10px 15px;
+}
+ul.topmenu li a:hover {
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	background: rgba(0,0,0,0.05);
+	box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	-moz-box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	-webkit-box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+}
+
+
+/* content */
+
+
+.content {
+	width:960px;
+	margin:0 auto;
+}
+
+/* front-form */
+
+.submit-form {
+	width:600px;
+	margin:0 auto;
+	height:400px;
+	padding-top: 200px;
+	background: transparent url(../images/logo.png) top center no-repeat;
+	margin-top:50px;
+}
+.link-input-wrapper {
+	height:42px;
+	display:block;
+	width:600px;
+	margin:0 auto;
+	padding-left:60px;
+	background: transparent url(../images/link-icon-large.png) 0px 20px no-repeat;
+	padding-top:10px;
+	margin-left:-10px;
+	padding-bottom:8px;
+}
+.link-input {
+	border: 0;
+	box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	-moz-box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	-webkit-box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	background: #eee url(../images/fieldgrad.png) top left repeat-x;
+	padding-top:10px;
+	height:40px;
+	width:430px;
+	padding-left: 7px;
+	font-size:24px;
+}
+.link-button {
+	height:48px;
+	width:130px;
+	margin-left:10px;
+	background:#555 url(../images/go-button.png) top left repeat-x;
+	box-shadow: 1px 1px 3px #333;
+	-moz-box-shadow: 1px 1px 3px #333;
+	-webkit-box-shadow: 1px 1px 3px #333;
+	border:1px #999 solid;
+	font-size:20px;
+	font-weight:bold;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	font-family: 'Ubuntu', sans-serif;
+	color:#fff;
+	text-shadow:0px 1px 1px #000;
+}
+.link-button:hover {
+	background:#555 url(../images/go-button.png) bottom left repeat-x;
+	cursor:pointer;
+}
+.slogan {
+	color:#444;
+	text-shadow:0px 1px 1px #fff;
+	font-weight:bold;
+	position:relative;
+	top:-70px;
+	margin-left:130px;
+}
+/*footer */
+
+.footer {
+	width:960px;
+	margin:0 auto;
+	background:transparent url(../images/divider-hor.png) top center no-repeat;
+	height:60px;
+}
+ul.botmenu {
+	display:block;
+	float:left;
+	padding:0;
+	font-size:12px;
+	margin-top:20px;
+}
+ul.botmenu li {
+	list-style:none;
+	display:block;
+	float:left;
+	padding:8px 20px;
+	background: transparent url(../images/divider-menu.png) center right no-repeat;
+	text-shadow: 0px 1px 1px #fff;
+}
+ul.botmenu li.first {
+	padding-left:0px;
+}
+ul.botmenu li.last {
+	margin-right:0;
+	background-image:none;
+}
+ul.botmenu li a {
+	text-decoration:underline;
+	padding:10px 15px;
+}
+ul.botmenu li a:hover {
+	color:#888;
+}
+ul.botmenu li.github a {
+	padding-left:40px;
+	background: transparent url(../images/github-icon.png) center left no-repeat;
+}
+.copyright {
+	font-size:11px;
+	text-align:right;
+	float:right;
+	opacity:0.7;
+	margin-top:15px;
+}
+
+/* login-form */
+
+.shadow {
+	background: #222;
+}
+.login-form {
+	width:300px;
+	margin:0 auto;
+	background:#1e9dc1;
+	height:400px;
+	margin-top:150px;
+	box-shadow: 2px 2px 20px #000;
+	-moz-box-shadow: 2px 2px 20px #000;
+	-webkit-box-shadow:2px 2px 20px #000;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-o-border-radius:10px;
+	position:fixed;
+	left:50%;
+	margin-left:-150px;
+	z-index:1000;
+	color:#fff;
+	opacity:0;
+}
+.login {
+	cursor:pointer;
+}
+.close {
+	font-size:30px;
+	width:40px;
+	font-weight:bold;
+	color:#fff;
+	padding:10px;
+	cursor:pointer;
+	float:right;
+	margin-right:8px;
+	margin-top:3px;
+	position:relative;
+	z-index:1100;
+}
+.tab {
+	display:block;
+	font-size:20px;
+	float:left;
+	padding-bottom:2px;
+	border-bottom:1px #fff dashed;
+	margin: 20px 20px 0;
+}
+.tab.active {
+	font-weight:bold;
+	border-bottom:0;
+}
+.reg-f {
+	display:none;
+}
+.reg-f, .login-f {
+	position:relative;
+	top:25px;
+}
+.fieldwrap {
+	width:auto;
+	display:block;
+	float:none;
+	clear:both;
+	text-align:right;
+	padding-right:40px;
+}
+.reg-f .f-text, .login-f .f-text {
+	border: 0;
+	box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	-moz-box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	-webkit-box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	background: #eee url(../images/fieldgrad.png) top left repeat-x;
+	padding-top:10px;
+	height:24px;
+	padding-left: 7px;
+	font-size:14px;
+}
+.logbut, .regbut {
+	height:32px;
+	background:#555 url(../images/go-button.png) top left repeat-x;
+	box-shadow: 1px 1px 3px #333;
+	-moz-box-shadow: 1px 1px 3px #333;
+	-webkit-box-shadow: 1px 1px 3px #333;
+	border:1px #999 solid;
+	font-size:16px;
+	padding:6px 12px;
+	font-weight:bold;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	font-family: 'Ubuntu', sans-serif;
+	color:#fff;
+	text-shadow:0px 1px 1px #000;
+	margin-top:10px;
+}
+.logbut:hover, .regbut:hover {
+	background:#555 url(../images/go-button.png) bottom left repeat-x;
+	cursor:pointer;
+}
+.fieldwrap label, .fieldwrap input {
+	display:block;
+	float:right;
+	margin-right:40px;
+	margin-bottom:10px;
+}
+.fieldwrap .logbut, .fieldwrap .regbut {
+	float:right;
+}
+.login-tab, .reg-tab {
+	cursor:pointer;
+	position:relative;
+	z-index:1101;
+}

@@ -98,7 +98,7 @@ class Crawler:
         http_status = response.getcode()
         if http_status in [200]:
             # run threads
-            for i in range(0, 25):
+            for i in range(0, 15):
                 t = Thread(target=self.worker)
                 t.daemon = True
                 t.start()
@@ -123,9 +123,3 @@ class Crawler:
         else:
             self.results = {'error': response.code}
         return self.results
-
-c = Crawler('http://djangodash.com') 
-results = c.run()
-from pprint import pprint
-pprint(results)
-#print len(results["internal"]["web"]), len(results["external"]["web"])
