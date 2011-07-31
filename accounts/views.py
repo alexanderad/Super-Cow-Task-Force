@@ -4,9 +4,10 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django import forms
 import simplejson as json
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from accounts.models import UserProfile
+from django.core.urlresolvers import reverse
 
 class LoginForm(forms.Form):
     """ login form """
@@ -56,3 +57,8 @@ def json_login(request):
         else:            
             data = {"error": 1, "form_errors": form.errors}
     return HttpResponse(json.dumps(data, ensure_ascii=False), mimetype="application/json")
+    
+def account_logout(request):
+    """ logout """
+    logout(request)    
+    return HttpResponseRedirect(reverse('index.views.index'))

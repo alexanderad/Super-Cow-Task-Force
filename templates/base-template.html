@@ -40,14 +40,12 @@
         <div class="top-logo"><a href="{% url index.views.index %}"><img src="{{ MEDIA_URL }}/images/logo-small.png" width="149" height="69" alt="Linky" /></a></div> 
     {% endblock %}
     
-   
-    
   {% if user.is_authenticated %}
     <ul class="topmenu">
-      <li>logout</li>
-      <li>dashboard</li>
-      <li>settings</li>
-      <li class="last">how in works </li>
+      <li><a href="{% url accounts.views.account_logout %}">logout</a></li>
+      <li><a href="">dashboard</a></li>
+      <li><a href="">settings</a></li>
+      <li class="last"><a href="">how in works</a></li>
     </ul>
   {% else %}      
     <ul class="topmenu">
@@ -78,7 +76,7 @@
           <li><a class="login">log in</a></li>
           <li><a class="login register">register</a></li>
       {% else %}    
-          <li><a href="{% url accounts.views.logout %}">logout</a></li>
+          <li><a href="{% url accounts.views.account_logout %}">logout</a></li>
       {% endif %}    
       <li class="github last"><a href="http://github.com/">github</a></li>
     </ul>
