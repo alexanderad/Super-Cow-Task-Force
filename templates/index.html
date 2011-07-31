@@ -2,10 +2,12 @@
 {% block toplogo %}{% endblock %}
 {% block content %}
     <div class="submit-form"> <span class="slogan">Keep your links alive!</span>
-      <form>
+      <form action="{% url index.views.index %}" method="POST">
+          {% csrf_token %}
         <div class="link-input-wrapper">
-          <input type="text" class="link-input" />
-          <input name="" type="button" value="Check links"  class="link-button" />
+            {% if form.url.errors %}{{ form.url.errors }}{% endif %}
+            {{ form.url }}            
+          <input name="check" type="submit" value="Check links" class="link-button" />
         </div>
       </form>
     </div>

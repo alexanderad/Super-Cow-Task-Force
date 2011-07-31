@@ -8,8 +8,6 @@
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}/js/login.js"></script>
 
-
-
 <title>Linky: keep your links alive!</title>
 </head>
 
@@ -38,7 +36,7 @@
   <!-- header -->
   <div class="header">
     {% block toplogo %}
-        <div class="top-logo"><a href="/"><img src="{{ MEDIA_URL }}/images/logo-small.png" width="149" height="69" alt="Linky" /></a></div> 
+        <div class="top-logo"><a href="{% url index.views.index %}"><img src="{{ MEDIA_URL }}/images/logo-small.png" width="149" height="69" alt="Linky" /></a></div> 
     {% endblock %}
    <span class="hidden">{% if user.is_authenticated %}</span>
     <ul class="topmenu hidden">
