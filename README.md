@@ -1,5 +1,6 @@
 ## Linky: Keep your links alive!
 [http://linky.ep.io/](http://linky.ep.io/)
+License: GPLv3
 
 Linky is a service that monitors links on the provided page and notifies you on possible problems with them. 
 With Linky your links are safe. The smart way. Your links are divided into the following categories:

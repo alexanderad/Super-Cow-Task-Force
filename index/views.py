@@ -26,9 +26,9 @@ def quick_test(request):
         c = Crawler(url_to_test)
         raw_results = c.run()
         results = {"error": raw_results["error"],
-                   "results_by_category": ((u'External links', 'ext', raw_results["external"]),
-                                           (u'Internal links', 'int', raw_results["internal"]),
-                                           (u'System', 'system', raw_results["system"]),
+                   "results_by_category": ((u'External links', 'ext', raw_results["external"], len(raw_results["external"]["web"]) + len(raw_results["external"]["img"])),
+                                           (u'Internal links', 'int', raw_results["internal"], len(raw_results["internal"]["web"]) + len(raw_results["internal"]["img"])),
+                                           (u'System', 'system', raw_results["system"], len(raw_results["external"]["css"]) + len(raw_results["external"]["js"])),
             )           
         }
     if form is None:

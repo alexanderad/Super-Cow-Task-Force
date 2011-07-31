@@ -157,7 +157,7 @@ class Crawler:
                                 "link": link,
                     })
                     all_links_filtered.append(link)
-            self.q.join()           
+            self.q.join()                       
         else:
             self.results = {'error': response.code}
         return self.results
