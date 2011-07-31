@@ -92,21 +92,26 @@ jQuery(document).ready(function ($) {
                     password: $("#id_login_password").val(), 
                     csrfmiddlewaretoken: getCookie('csrftoken'),
         };
-        $.post('/accounts/json/login', request_data, function(response_data) {
-            console.log(response_data);
-            if(response_data.error > 0) {                
-                switch(response_data.error) {
-                    case 1:
-                        // validation errors 
-                        console.log(response_data.form_errors);
-                        console.log(response_data.form_errors.length);
-                        for(var i = 0; i <= response_data.form_errors.length; i++) {
-                            console.log(response_data.form_errors[i]);
-                        }
-                        break;                    
-                };
+        $.post('/accounts/json/login', request_data, function(response_data) {                           
+            switch(response_data.error) {
+                case 1:
+                    // validation errors
+                    for(v in response_data.form_errors) {
+                        $("#id_login_" + v).before('<ul class="errorlist"><li>' + response_data.form_errors[v] + '</li></ul>');
+                    };
+                    setTimeout(function() { $(".errorlist").fadeOut() }, 3500);
+                    break;
+                    
+                case 403:
+                    // wrong username and or password
+                    $("#id_login_email").before('<ul class="errorlist"><li>' + response_data.non_field_error + '</li></ul>');
+                    break;
+                    
+                case 0:
+                    $('.close').click();
+                    $(location).attr('href', '/');
+                    break;
             };
-        });
-        //$("#id_login_errors").empty().append('<ul class="errorlist"><li>11</li></ul>');
+        });        
     });
 });

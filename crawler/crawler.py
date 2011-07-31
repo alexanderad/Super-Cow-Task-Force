@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 import re
 import urllib2
+import socket
 from BeautifulSoup import BeautifulSoup as Soup
 from threading import Thread
 from Queue import Queue
 from tasks.constants import LINK_TYPES_DICT
-
-#from crawler.constants import HTTP_RESPONSE_CODES
 from BaseHTTPServer import BaseHTTPRequestHandler
-import socket
-socket.setdefaulttimeout(0.5)
+from django.utils.html import strip_tags, strip_entities
 
+# set timeout
+socket.setdefaulttimeout(1.2)
 
 HTTP_RESPONSE_CODES = BaseHTTPRequestHandler.responses
 
@@ -65,13 +65,20 @@ def get_link_type(soup_name):
     """ convert soup name to linky link type """
     return SOUP_NAMES2LINK_TYPES.get(soup_name)
 
-def get_anchor(l):
-    if l.text:
-        return l.text
+def get_anchor(soup_element, link):
+    # web
+    if soup_element.text:
+        return soup_element.text
+    # images
     for k in ["title", "alt"]:
-        if l.has_key(k):
-            return l[k]
-    return u'-'
+        if soup_element.has_key(k) and soup_element[k]:
+            return soup_element[k]
+    # css/js & other 
+    try:
+        return link.split("/")[-1]
+    except IndexError:
+        pass
+    return u''
 
 #FIXME
 def get_full_link(host, link):
@@ -86,7 +93,7 @@ class Crawler:
         self.url = page_url
         self.link_types = link_types or 'web css js img'
         self.results = {'error': 0, 'internal': {'web': [], 'css': [], 'js': [], 'img': []}, 'external': {'web': [], 'css': [], 'js': [], 'img': []}}
-        self.q = Queue(25)        
+        self.q = Queue(50)        
     
     def worker(self):
         while True:
@@ -130,7 +137,7 @@ class Crawler:
                     self.q.put({"link_target": get_link_target(self.host, link),
                                 "link_type": get_link_type(l.name),                                
                                 "full_link": get_full_link(self.host, link),
-                                "link_anchor": get_anchor(l),
+                                "link_anchor": strip_tags(strip_entities(get_anchor(l, link))),
                                 "link": link,
                     })
                     all_links_filtered.append(link)

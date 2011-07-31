@@ -57,14 +57,12 @@ a:hover {
 ul.topmenu {
 	display:block;
 	font-weight:bold;
-	float:right;
-	position:relative;
-	top:-70px;
+	position:absolute;
+	top:0;
+	width:960px;
 	margin-top:20px;
 }
-.front ul.topmenu {
-	top:0px;
-}
+
 ul.topmenu.hidden {
 	display:none;
 }
@@ -75,9 +73,9 @@ ul.topmenu.hidden {
 ul.topmenu li {
 	list-style:none;
 	display:block;
-	float:left;
+	float:right;
 	padding:8px 30px;
-	background: transparent url(../images/divider-menu.png) center right no-repeat;
+	background: transparent url(../images/divider-menu.png) center left no-repeat;
 	text-shadow: 0px 1px 1px #fff;
 }
 ul.topmenu li.last {
@@ -246,7 +244,7 @@ ul.botmenu li.github a {
 	margin:0 auto;
 	background:#1e9dc1;
 	height:400px;
-	margin-top:150px;
+	margin-top:15%;
 	box-shadow: 2px 2px 20px #000;
 	-moz-box-shadow: 2px 2px 20px #000;
 	-webkit-box-shadow:2px 2px 20px #000;
@@ -501,6 +499,7 @@ h1.system-links-heading {
 }
 .login-form .errorlist {
 	margin-left:-200px;
+	margin-top:5px;
 	
 }
 .errorlist li {
@@ -515,22 +514,22 @@ h1.system-links-heading {
 .message {width:600px;
 margin:40px auto 10px;
 padding:22px 20px 30px 80px;
-text-shadow:1px 1px 1px #777;}	
+}	
 		
 .message.warning {
 border: 1px #ffc04d solid; 
 background:#FFC url(../images/warning.png) 20px 20px no-repeat; 
 background:rgba(255,221,159,0.42) url(../images/warning.png) 20px 20px no-repeat; 
-color:#F90; }
+ }
 
 .message.ok {
 border: 1px #3C3 solid; 
 background: #9F6 url(../images/warning.png) 20px 20px no-repeat; 
 background:rgba(95,196,28,0.2) url(../images/ok.png) 20px 20px no-repeat; 
-color:#589b00; }
+ }
 
 .message.info {
 border: 1px #0099a6 solid; 
 background: #9F6 url(../images/warning.png) 20px 20px no-repeat; 
 background:rgba(24,155,195,0.20) url(../images/info.png) 20px 20px no-repeat; 
-color:#0099a6; }
+ }
