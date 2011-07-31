@@ -51,6 +51,8 @@ a:hover {
 .header {
 	width:960px;
 	margin:0 auto;
+	float:none;clear:both;
+	display:block;
 	background:transparent url(../images/divider-hor.png) bottom center no-repeat;
 	height:72px;
 }
@@ -375,6 +377,8 @@ ul.botmenu li.github a {
 	margin:0 auto;
 	padding-top:0;
 	padding-left:40px;
+
+	
 	background: transparent url(../images/link-icon-small.png) 0px 20px no-repeat;
 	margin-left:0;
 }
@@ -392,7 +396,7 @@ ul.botmenu li.github a {
 	height:29px;
 	width:770px;
 	position:relative;
-	top:-50px;
+	top:14px;
 	padding-left: 7px;
 	font-size:18px;
 }
@@ -401,7 +405,7 @@ ul.botmenu li.github a {
 	width:120px;
 	margin-left:10px;
 	position:relative;
-	top:-52px;
+	top:12px;
 	background:#555 url(../images/go-button.png) top left repeat-x;
 	box-shadow: 1px 1px 3px #333;
 	-moz-box-shadow: 1px 1px 3px #333;
