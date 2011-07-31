@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django import forms
-
+from crawler.crawler import Crawler
 
 class QuickTestCheckForm(forms.Form):
     """ check form """
@@ -22,14 +22,18 @@ def quick_test(request):
         url_to_test = request.session.pop("url-to-test")
 
     if url_to_test:
-        assert False, "we have url to test!"
+        # lets check
+        c = Crawler(url_to_test)
+        results = c.run()
+        from pprint import pprint
+        pprint(results)
 
     if form is None:
         initial = {}
         if url_to_test:
             initial.update({"url": url_to_test})
         form = QuickTestCheckForm(initial=initial)
-    return render_to_response('quick-test.html', {"form": form}, context_instance=RequestContext(request))
+    return render_to_response('quick-test.html', {"form": form, "results": results}, context_instance=RequestContext(request))
 
 def index(request):
     """ index page """

@@ -496,3 +496,26 @@ h1.system-links-heading {
 .result .errorlist {
 		margin-left:0px;
 		margin-top:90px;}
+		
+.message {width:600px;
+margin:40px auto 10px;
+padding:22px 20px 30px 80px;
+text-shadow:1px 1px 1px #777;}	
+		
+.message.warning {
+border: 1px #ffc04d solid; 
+background:#FFC url(../images/warning.png) 20px 20px no-repeat; 
+background:rgba(255,221,159,0.42) url(../images/warning.png) 20px 20px no-repeat; 
+color:#F90; }
+
+.message.ok {
+border: 1px #3C3 solid; 
+background: #9F6 url(../images/warning.png) 20px 20px no-repeat; 
+background:rgba(95,196,28,0.2) url(../images/ok.png) 20px 20px no-repeat; 
+color:#589b00; }
+
+.message.info {
+border: 1px #0099a6 solid; 
+background: #9F6 url(../images/warning.png) 20px 20px no-repeat; 
+background:rgba(24,155,195,0.20) url(../images/info.png) 20px 20px no-repeat; 
+color:#0099a6; }

@@ -3,8 +3,10 @@ LINK_TYPES = (
                 ('css', u'CSS'),
                 ('js', u'JavaScript'),
                 ('img', u'Images'),
-                ('web', u'A links'), 
+                ('web', u'Web Pages'), 
 )
+
+LINK_TYPES_DICT = dict(LINK_TYPES)
 
 LINK_STATUSES = (
                 ('ok', u'Ok'),
@@ -12,3 +14,5 @@ LINK_STATUSES = (
                 ('muted', u'Muted'),
                 ('dead', 'Dead'),
 )
+
+LINK_STATUSES_DICT = dict(LINK_STATUSES)

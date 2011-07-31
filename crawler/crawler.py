@@ -4,6 +4,7 @@ import urllib2
 from BeautifulSoup import BeautifulSoup as Soup
 from threading import Thread
 from Queue import Queue
+from tasks.constants import LINK_TYPES_DICT
 
 #from crawler.constants import HTTP_RESPONSE_CODES
 from BaseHTTPServer import BaseHTTPRequestHandler
@@ -39,8 +40,10 @@ def perform_head_request(url):
         response = urllib2.urlopen(HEADRequest(url))
         return {"http_status": response.getcode(), 
                 "size": response.headers["Content-Length"] if response.headers.has_key("Content-Length") else 0}
-    except urllib2.URLError, e:
-        return {"http_status": 404}        
+    #except urllib2.URLError, e:
+    except Exception, e:
+        print e
+        return {"http_status": -1, "verbose": u'%s' % e}        
     return {}
 
 def perform_get_request(url):
@@ -91,7 +94,7 @@ class Crawler:
         try:
             response = urllib2.urlopen(request)
             page_data = response.read()
-        except urllib2.URLError, e:
+        except Exception, e:
             results = {'error': -1, 'exception': e}
             return results
 
@@ -114,8 +117,9 @@ class Crawler:
                     link = l["src"].strip()
                 if link and link not in all_links_filtered:                    
                     self.q.put({"link_target": get_link_target(self.host, link),
-                                "link_type": get_link_type(l.name),
+                                "link_type": get_link_type(l.name),                                
                                 "full_link": get_full_link(self.host, link),
+                                "link_anchor": l.text if l.text else u'',
                                 "link": link,
                     })
                     all_links_filtered.append(link)
