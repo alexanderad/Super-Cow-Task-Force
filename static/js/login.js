@@ -86,5 +86,27 @@ jQuery(document).ready(function ($) {
         $('.login-f').css('display', 'none');
 
     });
-
+    
+    $("#id_login_button").click(function() {        
+        var request_data = {email: $("#id_login_email").val(),
+                    password: $("#id_login_password").val(), 
+                    csrfmiddlewaretoken: getCookie('csrftoken'),
+        };
+        $.post('/accounts/json/login', request_data, function(response_data) {
+            console.log(response_data);
+            if(response_data.error > 0) {                
+                switch(response_data.error) {
+                    case 1:
+                        // validation errors 
+                        console.log(response_data.form_errors);
+                        console.log(response_data.form_errors.length);
+                        for(var i = 0; i <= response_data.form_errors.length; i++) {
+                            console.log(response_data.form_errors[i]);
+                        }
+                        break;                    
+                };
+            };
+        });
+        //$("#id_login_errors").empty().append('<ul class="errorlist"><li>11</li></ul>');
+    });
 });

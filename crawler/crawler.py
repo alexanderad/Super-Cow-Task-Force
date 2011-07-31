@@ -8,6 +8,8 @@ from tasks.constants import LINK_TYPES_DICT
 
 #from crawler.constants import HTTP_RESPONSE_CODES
 from BaseHTTPServer import BaseHTTPRequestHandler
+import socket
+socket.setdefaulttimeout(0.5)
 
 
 HTTP_RESPONSE_CODES = BaseHTTPRequestHandler.responses
@@ -55,7 +57,8 @@ def perform_get_request(url):
         return {"http_status": response.getcode(),
                 "title": title.text if title else u''}
     except urllib2.URLError, e:
-        return {"http_status": 404}
+        #return {"http_status": 404}
+        pass
     return {}        
 
 def get_link_type(soup_name):

@@ -36,6 +36,9 @@ a:hover {
 	outline:none;
 	-moz-outline:none;
 }
+
+.clearfloat {width:100%; float:none; clear:both;}
+
 .wrapper {
 	background:transparent url(../images/top.png) top left repeat-x;
 	position:absolute;
@@ -427,16 +430,17 @@ ul.botmenu li.github a {
 	color:#07B1D6
 }
 .results-table {
-	text-shadow:0px 1px 2px #fff;
+text-shadow:0px 1px 2px #fff;
 font-size:14px;
+width:800px;
 table-layout: fixed;
 }
 .results-table td {
 	padding:8px 10px;
 }
 
-.results-table td.link-text {width:150px; word-wrap:break-word;}
-.results-table td.link-url {width:700px;  word-wrap:break-word;}
+.results-table td.link-text { width:auto; word-wrap:break-word;}
+.results-table td.link-url {width:650px;  word-wrap:break-word;}
 
 
 .results-table tr.odd td {
@@ -477,6 +481,7 @@ h1.system-links-heading {
 .results-table td.link-text {
 	width:250px;
 }
+/*messages */
 .errorlist {
 	display:block;
 	border-radius:6px;
@@ -493,6 +498,10 @@ h1.system-links-heading {
 	width:180px;
 	margin-left:-280px;
 
+}
+.login-form .errorlist {
+	margin-left:-200px;
+	
 }
 .errorlist li {
 	list-style:none;

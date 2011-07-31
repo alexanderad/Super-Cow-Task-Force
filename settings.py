@@ -87,6 +87,19 @@ APPEND_SLASH = False
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+"""
+
 try:
     from local_settings import *
 except ImportError:

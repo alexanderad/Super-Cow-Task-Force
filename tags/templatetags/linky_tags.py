@@ -14,4 +14,11 @@ def get_link_status_icon(l):
     if l["http_status"] == 200:
         return 'ok'
     return 'warning'
+
+@register.filter
+def link_shortener(link):
+    if len(link) > 70:
+        return u'%s...%s' % (link[:50], link[-5:])        
+    return link
+    
     
