@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'tasks',
     'crawler',
     'dashboard',
+    'index',
 )
 
 LOGGING = {

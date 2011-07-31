@@ -58,17 +58,29 @@ h1.tasks-heading {
 	font-weight:normal;
 	border-left:1px solid #ddd;
 }
-.task-wrapper div.task-status.dead-found {
-	background:#F33;
-	width:187px;
+
+.task-wrapper div.task-status {
+		width:187px;
 	border-radius: 0 4px 4px 0;
 	-moz-border-radius:0 4px 4px 0;
 	-webkit-border-radius:0 4px 4px 0;
 }
+
+.task-wrapper div.task-status.dead-found {
+	background:#F33;
+
+}
 .task-wrapper div.task-status.dead-found .tabcontent {
 	color:#fff;
-	background:#F33;
+
 }
+
+
+.task-wrapper div.task-status.ok{
+	color:#fff;
+	background:#0C0;
+}
+
 .delete-task {
 	display:block;
 	height:62px;
@@ -189,3 +201,4 @@ ul.link-params li.link-warning {color:#F90}
 .ui-tooltip {font-size:16px;} 
 
 .task-container .link-text span {cursor:pointer;}
+

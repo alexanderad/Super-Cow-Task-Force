@@ -1,0 +1,67 @@
+{% extends "base-template.html" %}
+{% block additional_css %}<link href="{{ MEDIA_URL }}/css/settings.css" rel="stylesheet" type="text/css" />{% endblock %}
+{% block content %}
+<div class="content settings">
+      <h1>Dashboard settings:</h1>
+      <h2>How often Linky must check your links?</h2>
+      <form action="" method="get" class="settings-form">
+        <h3>external links</h3>
+        <label class="sf-never"><input type="radio" value="never" name="ext-links-form"  />
+        never</label>
+        <label><input name="ext-links-form" type="radio" value="daily" checked="checked"/>
+        daily</label>
+        <label><input type="radio" value="twice a week" name="ext-links-form"/>
+        twice a week</label>
+        <label><input type="radio" value="once a week" name="ext-links-form"/>
+        once a week</label>
+        <label><input type="radio" value="monthly" name="ext-links-form"/>
+        monthly</label>
+        <h3>Internal links</h3>
+        <label class="sf-never"><input type="radio" value="never" name="int-links-form" />
+        never </label>
+        <label><input type="radio" value="daily" name="int-links-form" checked="checked"/>
+        daily</label>
+        <label><input type="radio" value="twice a week" name="int-links-form"/>
+        twice a week</label>
+        <label><input type="radio" value="once a week" name="int-links-form"/>
+        once a week</label>
+        <label><input type="radio" value="monthly" name="int-links-form"/>
+        monthly</label>
+        <h3>System links</h3>
+        <label class="sf-never"><input type="radio" value="never" name="sys-links-form" />
+        never </label>
+        <label><input type="radio" value="daily" name="sys-links-form" checked="checked"/>
+        daily</label>
+        <label><input type="radio" value="twice a week" name="sys-links-form"/>
+        twice a week</label>
+        <label><input type="radio" value="once a week" name="sys-links-form"/>
+        once a week</label>
+        <label><input type="radio" value="monthly" name="sys-links-form"/>
+        monthly</label>
+        <br />
+        <h2>Notification settings:</h2>
+        <label><input type="radio" value="dashboard only" name="notification-form" checked="checked"/>
+        dashboard only</label>
+        <label><input type="radio" value="once a week" name="notification-form" />
+        e-mail me once a week, if dead link found</label>
+        <label><input type="radio" value="dead link" name="notification-form" />
+        e-mail me if dead link found (more then 3 days unavalible)</label>
+        <label><input type="radio" value="link unavalible" name="notification-form" />
+        e-mail me if link unavalible more than 1 day</label>
+        <label><input type="radio" value="every problem" name="notification-form" />
+        e-mail me about every problem</label>
+       <div class="blue-button-center"> <input name="Submit" type="submit" value="save dashboard settings" class="blue-button" /></div>
+      </form>
+      <h1>account settings</h1>
+      <form action="" method="get">
+        <h3>E-mail</h3>
+        <input name="mail-input" type="text" class="mail-pass-form" id="email" value="kostyg@gmail.com" />
+        <h3>Password:</h3>
+        <input name="pass-input" type="password" id="pass-input" class="mail-pass-form"/>
+        <br />
+        <input name="pass-input2" type="password" id="pass-input2" class="mail-pass-form"/>
+        <br />
+        <div class="blue-button-center"><input name="Submit" type="submit" value="save account settings" class="blue-button"/></div>
+      </form>
+    </div>
+{% endblock %}

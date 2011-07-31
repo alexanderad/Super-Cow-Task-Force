@@ -1,0 +1,200 @@
+{% extends "base-template.html" %}
+{% block additional_css %}
+    <link href="{{ MEDIA_URL }}/css/jquery.qtip.css" rel="stylesheet" type="text/css" />
+    <link href="{{ MEDIA_URL }}/css/dashboard.css" rel="stylesheet" type="text/css" />
+    <link href="{{ MEDIA_URL }}/css/settings.css" rel="stylesheet" type="text/css" />        
+{% endblock %}
+{% block additional_js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}/js/dashboard.js"></script>    
+{% endblock %}
+{% block content %}
+        <!--    <div class="message warning">message warning</div>
+          <div class="message ok">message ok</div>
+            <div class="message info">message info</div> -->
+    <h1 class="tasks-heading">Your tasks:</h1>
+    
+    <div class="task-container">
+    
+      <div class="task-wrapper">
+        <div class="pageurl">http://example.com</div>
+        <div class="task-links"> <span class="tabtitle">links</span> <span class="tabcontent">400</span> </div>
+        <div class="task-check"> <span class="tabtitle">last check</span> <span class="tabcontent">11.07.2011</span> </div>
+        <div class="task-status dead-found"> <span class="tabtitle">status</span> <span class="tabcontent">5 dead links found</span> </div>
+        <a class="delete-task"></a> 
+      </div>
+    <!-- this block loads via ajax when clicking div class="pageurl" -->
+        
+      <div class="task-statusbar"> <span class="status-title"> task status:</span>
+        <div class="statusbar" >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div class="task-error"></div>
+          <div class="task-error"></div>
+          <div class="task-error"></div>
+          <div class="task-error"></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div class="task-inactive"></div>
+          <div class="task-inactive"></div>
+          <div class="task-error"></div>
+          <div class="task-error"></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      
+      <!-- block result table -->
+      <div class="clearfloat"></div>
+      <h1 class="ext-links-heading">External links</h1>
+      <div class="dontwatch"><span>don't monitor this link category</span></div>
+      <div class="clearfloat"></div>
+      <h2>Web Pages</h2>
+      <table class="results-table" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+          <td class="link-status-icon"><img title="error" src="images/icon-error.png" width="16" height="16" /></td>
+          <td class="link-text"><span>Join the party</span></td>
+          <td class="link-url"><a href="http://example.com" target="_blank"> http://www.gravatar.com/avatar.php?default=http%3A%2F%2Fmedia.djangodash.com%2Fsite%2Fimages%2F2009%2Fdefault_gravatar.gif&size=40&gravatar_id=05697d02eb9dc965c91940b6a629fabe </a></td>
+          <td class="watch-icon"><div class="watch-on"></div></td>
+        </tr>
+        <tr class="even status-dead">
+          <td class="link-status-icon"><img title="dead" src="images/icon-dead.png" width="16" height="16" /></td>
+          <td class="link-text"><span>Join the party</span></td>
+          <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+          <td class="watch-icon"><div class="watch-off"></div></td>
+        </tr>
+      </table>
+      <h2>Images</h2>
+      <table class="results-table" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-ok">
+          <td class="link-status-icon"><img title="error" src="images/icon-ok.png" width="16" height="16" /></td>
+          <td class="link-text"><span>Join the party</span></td>
+          <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+          <td class="watch-icon"><div class="watch-on"></div></td>
+        </tr>
+        <tr class="even status-warning">
+          <td class="link-status-icon"><img title="dead" src="images/icon-warning.png" width="16" height="16" /></td>
+          <td class="link-text"><span>Join the party</span></td>
+          <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+          <td class="watch-icon"><div class="watch-on"></div></td>
+        </tr>
+         <tr class="odd status-dead-off">
+          <td class="link-status-icon"><img title="dead" src="images/dead-gray.png" width="16" height="16" /></td>
+          <td class="link-text"><span>Join the party</span></td>
+          <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+          <td class="watch-icon"><div class="watch-on"></div></td>
+        </tr>
+            <tr class="even status-gone">
+          <td class="link-status-icon"><img title="dead" src="images/icon-gone.png" width="16" height="16" /></td>
+          <td class="link-text"><span>Join the party</span></td>
+          <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+          <td class="watch-icon"><div class="watch-on"></div></td>
+        </tr>
+         <tr class="odd status-warn-off">
+          <td class="link-status-icon"><img title="dead" src="images/warning-gray.png" width="16" height="16" /></td>
+          <td class="link-text"><span>Join the party</span></td>
+          <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+          <td class="watch-icon"><div class="watch-on"></div></td>
+        </tr>
+        
+        <tr class="status-explained"><td colspan="4"><div class="link-details" id="id_link-details"><div class="link-statusbar"> 
+<span class="status-title">link status:</span>
+              <div class="statusbar" >
+                <div checkdate="1.11.2011"></div>
+                <div checkdate="2.11.2011"></div>
+                <div checkdate="3.11.2011"></div>
+                <div></div>
+                <div></div>
+                <div class="task-error"></div>
+                <div class="task-error"></div>
+                <div class="task-error"></div>
+                <div class="task-error"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="task-inactive"></div>
+                <div class="task-inactive"></div>
+                <div class="task-error"></div>
+                <div class="task-error"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+            
+            <br class="clearfloat"  />
+            
+            <div class="link-data">
+              <div class="lastcheck-time">Last checked: 10.08.2011 | 21:48</div>
+              <ul class="link-params">
+                <li class="link-warning">warning: attribute title has changed from "old title" to "some other title"</li>
+                <li>link title: title</li>
+                <li>some other param</li>
+                <li>link title: title</li>
+                <li>some other param</li>
+              </ul>
+            </div>
+
+</div></td></tr>
+      </table>
+      
+      <!-- end block result table --> 
+   
+   
+    <!-- end block that loads via ajax when clicking div class="pageurl" -->
+        
+      
+    </div>
+    
+    
+    
+    <!-- another task -->
+    
+    <div class="task-container">
+      <div class="task-wrapper">
+        <div class="pageurl">http://example.com</div>
+        <div class="task-links"> <span class="tabcontent">400</span> </div>
+        <div class="task-check"> <span class="tabcontent">11.07.2011</span> </div>
+        <div class="task-status ok"><span class="tabcontent">ok</span> </div>
+        <a class="delete-task"></a> </div>
+    </div>
+    
+    <!-- another task -->
+    
+    <div class="task-container">
+      <div class="task-wrapper">
+        <div class="pageurl">http://example.com</div>
+        <div class="task-links"> <span class="tabcontent">400</span> </div>
+        <div class="task-check"> <span class="tabcontent">11.07.2011</span> </div>
+        <div class="task-status dead-found"><span class="tabcontent">5 dead links found</span> </div>
+        <a class="delete-task"></a> </div>
+    </div>
+
+{% endblock %}

@@ -249,7 +249,7 @@ ul.botmenu li.github a {
 	margin:0 auto;
 	background:#1e9dc1;
 	height:400px;
-	margin-top:15%;
+	margin-top:110px;
 	box-shadow: 2px 2px 20px #000;
 	-moz-box-shadow: 2px 2px 20px #000;
 	-webkit-box-shadow:2px 2px 20px #000;
@@ -578,3 +578,5 @@ background:rgba(24,155,195,0.20) url(../images/info.png) 20px 20px no-repeat;
 	background:transparent url(../images/user-mail-ico.png) center left no-repeat;
 
 }
+
+.promo-buttons {margin-top:30px;}

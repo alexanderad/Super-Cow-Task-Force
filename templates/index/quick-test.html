@@ -1,5 +1,8 @@
 {% extends "base-template.html" %}
 {% load linky_tags %}
+{% block additional_css %}    
+    <link href="{{ MEDIA_URL }}/css/settings.css" rel="stylesheet" type="text/css" />        
+{% endblock %}
 {% block bodytag %}<body class="result">{% endblock %}
 {% block content %}
     <div class="submit-form">
@@ -38,6 +41,13 @@
                     {% endfor %}
                 {% endif %}
             {% endfor %}
+            
+            <div class="promo-buttons">
+                <input name="" type="submit" value="login" class="blue-button login"/>
+                &nbsp;&nbsp;or&nbsp;&nbsp;
+                <input name="" type="submit" value="register" class="blue-button login register"/>&nbsp;&nbsp;to save your data and monitor this page.
+            </div>   
+            
         {% else %}
             <div class="message warning">
                 Unfortunately Linky can't access that URL (or it takes to much time to fetch it) :-(                
