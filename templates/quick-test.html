@@ -2,122 +2,231 @@
 {% block bodytag %}<body class="result">{% endblock %}
 {% block content %}
     <div class="submit-form">
-      <form >
+      <form action="{% url index.views.quick_test %}" method="POST">
         <div class="link-input-wrapper">
-          <input type="text" class="link-input"  value="url we checked"  />
-          <input name="" type="button" value="Check links"  class="link-button" />
+            {% csrf_token %}
+          {% if form.url.errors %}{{ form.url.errors }}{% endif %}{{ form.url }}
+          <input name="check" type="submit" value="Check link"  class="link-button" />
         </div>
       </form>
     </div>
-    
-    <!-- end block form on result page  -->
-    
-    <!-- block result table -->
-    <h1 class="ext-links-heading">External links</h1>
-    <h2>Web Pages</h2>
-    <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
-    <tr class="odd status-error">
-    <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
-    </tr>
-        <tr class="even status-dead">
-    <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
-    </tr>
-    
-    </table>
-    
-        <h2>Images</h2>
-    <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
-    <tr class="odd status-ok">
-    <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
-    </tr>
-        <tr class="even status-warning">
-    <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
-    </tr>
-    
-    </table>
-    
-    <h1 class="int-links-heading">Internal links</h1>
-    <h2>Web Pages</h2>
-    <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
-    <tr class="odd status-error">
-    <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
-    </tr>
-        <tr class="even status-dead">
-    <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
-    </tr>
-    
-    </table>
-    
-        <h2>Images</h2>
-    <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
-    <tr class="odd status-ok">
-    <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
-    </tr>
-        <tr class="even status-warning">
-    <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
-    </tr>
-    
-    </table>
-    
-    <h1 class="system-links-heading">System</h1>
-    <h2>CSS</h2>
-    <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
-    <tr class="odd status-error">
-    <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
-    </tr>
-        <tr class="even status-dead">
-    <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
-    </tr>
-    
-    </table>
-    
-       <h2>Javascript</h2>
-    <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
-    <tr class="odd status-error">
-    <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
-    </tr>
-        <tr class="even status-dead">
-    <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
-    </tr>
-    
-    </table>
-    
-        <h2>CSS images</h2>
-    <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
-    <tr class="odd status-ok">
-    <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
-    </tr>
-        <tr class="even status-warning">
-    <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
-    <td class="link-text"><span>Join the party</span></td>
-    <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
-    </tr>
-    
-    </table>
+    {% if not results %}
+        Please, enter URL above to check        
+    {% else %}    
+        <!-- block result table -->
+        <h1 class="ext-links-heading">External links</h1>
+        <h2>Web Pages</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-dead">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>
+        
+            <h2>Images</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-ok">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-warning">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>
+        
+        <h1 class="int-links-heading">Internal links</h1>
+        <h2>Web Pages</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-dead">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+        </tr><!-- block result table -->
+        <h1 class="ext-links-heading">External links</h1>
+        <h2>Web Pages</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-dead">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>
+        
+            <h2>Images</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-ok">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-warning">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>
+        
+        <h1 class="int-links-heading">Internal links</h1>
+        <h2>Web Pages</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-dead">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>
+        
+            <h2>Images</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-ok">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-warning">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>
+        
+        <h1 class="system-links-heading">System</h1>
+        <h2>CSS</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
+        </tr>
+            <tr class="even status-dead">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
+        </tr>
+        
+        </table>
+        
+           <h2>Javascript</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
+        </tr>
+            <tr class="even status-dead">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
+        </tr>
+        
+        </table>
+        
+            <h2>CSS images</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-ok">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-warning">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>        
+        
+        </table>
+        
+            <h2>Images</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-ok">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-warning">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>
+        
+        <h1 class="system-links-heading">System</h1>
+        <h2>CSS</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
+        </tr>
+            <tr class="even status-dead">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
+        </tr>
+        
+        </table>
+        
+           <h2>Javascript</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-error">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-error.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
+        </tr>
+            <tr class="even status-dead">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-dead.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.css" target="_blank"> http://example.com/1.css</a></td>
+        </tr>
+        
+        </table>
+        
+            <h2>CSS images</h2>
+        <table class="results-table" width="100%" cellpadding="1px" cellspacing="1px">
+        <tr class="odd status-ok">
+        <td class="link-status-icon"><img title="error" src="{{ MEDIA_URL }}/images/icon-ok.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+            <tr class="even status-warning">
+        <td class="link-status-icon"><img title="dead" src="{{ MEDIA_URL }}/images/icon-warning.png" width="16" height="16" /></td>
+        <td class="link-text"><span>Join the party</span></td>
+        <td class="link-url"><a href="http://example.com/1.jpg" target="_blank"> http://example.com</a></td>
+        </tr>
+        
+        </table>        
+    {% endif %}
 {% endblock %}

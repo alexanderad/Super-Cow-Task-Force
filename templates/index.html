@@ -5,9 +5,8 @@
       <form action="{% url index.views.index %}" method="POST">
           {% csrf_token %}
         <div class="link-input-wrapper">
-            {% if form.url.errors %}{{ form.url.errors }}{% endif %}
-            {{ form.url }}            
-          <input name="check" type="submit" value="Check links" class="link-button" />
+            {% if form.url.errors %}{{ form.url.errors }}{% endif %}{{ form.url }}
+          <input name="check" type="submit" value="Check link" class="link-button" />
         </div>
       </form>
     </div>

@@ -491,3 +491,8 @@ h1.system-links-heading {
 .errorlist li {
 	list-style:none;
 }
+
+
+.result .errorlist {
+		margin-left:0px;
+		margin-top:90px;}

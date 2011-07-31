@@ -2,7 +2,9 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.core.urlresolvers import reverse
 from django import forms
+
 
 class QuickTestCheckForm(forms.Form):
     """ check form """
@@ -10,7 +12,24 @@ class QuickTestCheckForm(forms.Form):
 
 def quick_test(request):
     """ quick test page """
-    return render_to_response('quick-test.html', {}, context_instance=RequestContext(request))
+    form, results, url_to_test = None, None, u''    
+    if "POST" == request.method:
+        form = QuickTestCheckForm(request.POST)
+        if form.is_valid():
+            url_to_test = form.cleaned_data["url"] 
+
+    if "url-to-test" in request.session:
+        url_to_test = request.session.pop("url-to-test")
+
+    if url_to_test:
+        assert False, "we have url to test!"
+
+    if form is None:
+        initial = {}
+        if url_to_test:
+            initial.update({"url": url_to_test})
+        form = QuickTestCheckForm(initial=initial)
+    return render_to_response('quick-test.html', {"form": form}, context_instance=RequestContext(request))
 
 def index(request):
     """ index page """
@@ -18,7 +37,9 @@ def index(request):
     if "POST" == request.method:
         form = QuickTestCheckForm(request.POST)
         if form.is_valid():
-            assert False, "form is valid"            
+            # make love not war
+            request.session["url-to-test"] = form.cleaned_data["url"]
+            return HttpResponseRedirect(reverse('index.views.quick_test'))
     if form is None:
         form = QuickTestCheckForm()
     return render_to_response('index.html', {"form": form}, context_instance=RequestContext(request))
