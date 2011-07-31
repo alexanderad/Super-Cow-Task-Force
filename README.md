@@ -38,3 +38,9 @@ At the same time Linky will keep log of availability of the page you are monitor
 * fully functional dashboard & settings tabs
 * allow user to add `sitemap.xml` of site that needs to be checked
 * user customizible timeout
+* speed up and optimize crawler, add support for favicon, rss/atom feed links, special rel links
+
+#### Authors
+Super Cow Task Force Team: two designers & one programmer
+Alexander Schapov, Konstantin Volia, Nata Obvintseva
+

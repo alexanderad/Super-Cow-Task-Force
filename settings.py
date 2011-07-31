@@ -88,6 +88,7 @@ APPEND_SLASH = False
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
+#NOTE: uncomment and edit DATABASES according to your needs
 """
 DATABASES = {
     'default': {

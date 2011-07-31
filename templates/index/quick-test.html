@@ -42,11 +42,13 @@
                 {% endif %}
             {% endfor %}
             
-            <div class="promo-buttons">
-                <input name="" type="submit" value="login" class="blue-button login"/>
-                &nbsp;&nbsp;or&nbsp;&nbsp;
-                <input name="" type="submit" value="register" class="blue-button login register"/>&nbsp;&nbsp;to save your data and monitor this page.
-            </div>   
+            {% if not user.is_authenticated %}
+                <div class="promo-buttons">
+                    <input name="" type="submit" value="login" class="blue-button login"/>
+                    &nbsp;&nbsp;or&nbsp;&nbsp;
+                    <input name="" type="submit" value="register" class="blue-button login register"/>&nbsp;&nbsp;to save your data and monitor this page.
+                </div>
+            {% endif %}   
             
         {% else %}
             <div class="message warning">

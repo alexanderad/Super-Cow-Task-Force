@@ -5,7 +5,7 @@
       <h1>Dashboard settings:</h1>
       <h2>How often Linky must check your links?</h2>
       <form action="" method="get" class="settings-form">
-        <h3>external links</h3>
+        <h3>External links</h3>
         <label class="sf-never"><input type="radio" value="never" name="ext-links-form"  />
         never</label>
         <label><input name="ext-links-form" type="radio" value="daily" checked="checked"/>
@@ -55,7 +55,7 @@
       <h1>account settings</h1>
       <form action="" method="get">
         <h3>E-mail</h3>
-        <input name="mail-input" type="text" class="mail-pass-form" id="email" value="kostyg@gmail.com" />
+        <input name="mail-input" type="text" class="mail-pass-form" id="email" value="{{ user.email }}" />
         <h3>Password:</h3>
         <input name="pass-input" type="password" id="pass-input" class="mail-pass-form"/>
         <br />

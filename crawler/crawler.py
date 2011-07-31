@@ -9,15 +9,15 @@ from tasks.constants import LINK_TYPES_DICT
 from BaseHTTPServer import BaseHTTPRequestHandler
 from django.utils.html import strip_tags, strip_entities
 
-# set timeout
+# set global timeout
 socket.setdefaulttimeout(5)
 
-HTTP_RESPONSE_CODES = BaseHTTPRequestHandler.responses
-
+# -*- coding: utf-8 -*-
 SOUP_NAMES2LINK_TYPES = {'link': 'css',
                          'a': 'web',
                          'img': 'img',
                          'script': 'js'}
+
 
 class HEADRequest(urllib2.Request):
     """ HEAD request """
@@ -35,6 +35,8 @@ def get_host(link):
     if match:
         return match.group('host')
     return None
+    
+
 
 def perform_head_request(url):
     """ perform HEAD request """    
@@ -84,7 +86,7 @@ def get_full_link(host, link):
     """ get full link """
     if not link.startswith("http://") and not link.startswith("https://"):
          return u'http://%s%s' % (host, '/' + link if not link.startswith("/") else link)
-    return link
+    return link    
 
 class Crawler:
     """ Page crawler """
@@ -123,7 +125,6 @@ class Crawler:
         except Exception, e:
             results = {'error': -1, 'exception': e}
             return results
-
         http_status = response.getcode()
         if http_status in [200]:
             # run threads
@@ -131,7 +132,6 @@ class Crawler:
                 t = Thread(target=self.worker)
                 t.daemon = True
                 t.start()
-
             self.host = request.host
             all_links = Soup(page_data).findAll(['a', 'img', 'script', 'link'])
             all_links_filtered = []
@@ -145,8 +145,7 @@ class Crawler:
                 if l.name in ['img', 'script'] and l.has_key('src'):
                     link = l["src"].strip()
                 if link and link not in all_links_filtered:
-
-                    #HACK
+                    #FIXME
                     if link.startswith("//"):
                         link = u'http:' + link
 
