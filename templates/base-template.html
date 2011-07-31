@@ -9,8 +9,13 @@
 <script type="text/javascript" src="{{ MEDIA_URL }}/js/login.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}/js/cookies.js"></script>
 {% block additional_js %}{% endblock %}
-
 <title>Linky: keep your links alive!</title>
+<!--[if lte IE 9]>
+<style type="text/css">
+.link-button {margin-top:-4px;}
+.link-input {border:#999 1px solid;}
+</style>
+<![endif]-->
 </head>
 
 {% block bodytag %}<body>{% endblock %}
