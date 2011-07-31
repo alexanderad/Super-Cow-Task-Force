@@ -9,8 +9,18 @@ body {
 	margin:0;
 	padding:0;
 	font-size:16px;
+	height:100%;
 	font-family: 'Ubuntu', sans-serif;
 }
+
+img, a {border:0;}
+
+h1 {
+	font-size:30px; 
+	text-shadow: 0px 1px 1px #fff;
+	color:#000;}
+	
+	h2 {font-size:18px; font-weight:normal; 	text-shadow: 0px 1px 1px #fff;}
 a {
 	color: #333;
 }
@@ -37,14 +47,19 @@ a:hover {
 	width:960px;
 	margin:0 auto;
 	background:transparent url(../images/divider-hor.png) bottom center no-repeat;
-	height:65px;
+	height:72px;
 }
 ul.topmenu {
 	display:block;
 	font-weight:bold;
 	float:right;
+	position:relative;
+	top:-70px;
 	margin-top:20px;
 }
+
+.front ul.topmenu {top:0px;}
+
 ul.topmenu.hidden {
 	display:none;
 }
@@ -81,6 +96,19 @@ ul.topmenu li a:hover {
 
 
 /* content */
+
+
+	
+.helptext {
+	text-shadow: 0px 1px 1px #fff;
+	color:#777; 
+	margin-left:50px;
+	font-weight:bold;
+	font-size:14px;}
+	
+.front .helptext {
+		font-weight:normal;
+ font-size:18px; }
 
 
 .content {
@@ -157,13 +185,15 @@ ul.topmenu li a:hover {
 	margin-left:130px;
 }
 /*footer */
-
+.front .footer {margin:0 auto;}
 .footer {
 	width:960px;
-	margin:0 auto;
+	margin:50px auto 0;
 	background:transparent url(../images/divider-hor.png) top center no-repeat;
 	height:60px;
 }
+
+
 ul.botmenu {
 	display:block;
 	float:left;
@@ -325,3 +355,106 @@ ul.botmenu li.github a {
 	position:relative;
 	z-index:1101;
 }
+
+/*result page */
+
+/* top form */
+
+/* front-form */
+
+.result .submit-form {
+	width:100%;
+	margin:0 auto;
+	height:60px;
+	position:relative; 
+	background-image: none;
+	margin-top:0px;
+	padding-top:0px;
+
+}
+.result .link-input-wrapper {
+	display:block;
+	width:920px;
+	margin:0 auto;
+	padding-top:0;
+	padding-left:40px;
+	background: transparent url(../images/link-icon-small.png) 0px 20px no-repeat;
+	margin-left:0;
+
+}
+.result .link-input {
+	border: 0;
+	box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	-moz-box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	-webkit-box-shadow: inset 1px 1px 2px #999, 0px 0px 2px #fff;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	background: #eee url(../images/fieldgrad.png) top left repeat-x;
+	padding-top:10px;
+	height:29px;
+	width:770px;
+	position:relative;
+	top:-50px;
+	padding-left: 7px;
+	font-size:18px;
+}
+.result .link-button {
+	height:38px;
+	width:120px;
+	margin-left:10px;
+	position:relative;
+	top:-52px;
+	background:#555 url(../images/go-button.png) top left repeat-x;
+	box-shadow: 1px 1px 3px #333;
+	-moz-box-shadow: 1px 1px 3px #333;
+	-webkit-box-shadow: 1px 1px 3px #333;
+	border:1px #999 solid;
+	font-size:14px;
+	font-weight:bold;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	font-family: 'Ubuntu', sans-serif;
+	color:#fff;
+	text-shadow:0px 1px 1px #000;
+}
+.result .link-button:hover {
+	background:#555 url(../images/go-button.png) bottom left repeat-x;
+	cursor:pointer;
+}
+
+
+
+.results-table a {color:#09698f;}
+.results-table a:hover {color:#07B1D6}
+
+
+.results-table  {text-shadow:0px 1px 2px #fff; font-si.results-tableze:14px;}
+
+.results-table td {padding:8px 10px;}
+
+.results-table tr.odd td {
+	background-color:#f4f4f4;
+	background-color:rgba(255,255,255,0.3);}
+.results-table tr.even td {
+	background-color:#ccc;
+	background-color:rgba(55,55,55,0.1);}
+
+h1.ext-links-heading {padding-right:50px; background:transparent url(../images/link-external.png) top right no-repeat; 
+ width:200px;  }
+ 
+ h1.int-links-heading {padding-right:40px; background:transparent url(../images/link-internal.png) top right no-repeat; 
+ width:200px;  }
+ 
+  h1.system-links-heading {padding-right:50px; background:transparent url(../images/link-system.png) top right no-repeat; 
+ width:115px;  }
+
+.status-dead td.link-text span{ background:#000; color:#fff;text-shadow:none; padding:5px 8px; } 
+
+.results-table td.link-status-icon {text-align:center; vertical-align:middle; width:40px; padding-top:5px;}
+
+.results-table td.link-text {width:250px;}
+

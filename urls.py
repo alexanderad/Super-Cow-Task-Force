@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     #(r'^dashboard/', include('dashboard.urls')),
     #(r'^accounts/', include('accounts.urls')),
     #(r'^tasks/', include('tasks.urls')),
+    (r'^index/quick-test', 'index.views.quick_test'),
     (r'^$', 'index.views.index'),
 )
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href="{{ MEDIA_URL }}/css/style.css" rel="stylesheet" type="text/css" />
+
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}/js/login.js"></script>
+
+
+
+<title>Linky: keep your links alive!</title>
+</head>
+
+{% block bodytag %}<body>{% endblock %}
+<div class="shadow"></div>
+<div class="login-form">
+  <div class="close">x</div>
+  <span class="login-tab tab">Log in</span><span class="reg-tab tab">Register</span>
+  <form class="login-f" id="id_login-f">
+  <div class="fieldwrap">  <input name="" type="text" class="f-text mail validate[required,custom[email]]" /><label>Email</label> </div>
+    <div class="fieldwrap">  <input name="" type="password" class="f-text pass" /><label>Password</label></div>
+  <div class="fieldwrap">  <input name="" type="button" class="logbut" value="login" /></div>
+  </form>
+  <form class="reg-f" id="id_reg-f">
+  
+    <div class="fieldwrap">   <input name="" type="text" class="f-text regmail validate[required,custom[email]]" /><label>Email</label></div>
+   <div class="fieldwrap">   <input name="" type="password" class="f-text regpass validate[required]" /><label>Password</label></div>
+     <div class="fieldwrap">  <input name="" type="password" class="f-text regdoublepass validate[required]" /><label>Repeat password</label></div>
+  <div class="fieldwrap"><input name="" type="button" class="regbut" value="register" /> </div>
+  
+  </form>
+  
+   </div>
+  
+<div class="wrapper"> 
+  <!-- header -->
+  <div class="header">
+    {% block toplogo %}
+        <div class="top-logo"><a href="/"><img src="{{ MEDIA_URL }}/images/logo-small.png" width="149" height="69" alt="Linky" /></a></div> 
+    {% endblock %}
+   <span class="hidden">{% if user.is_authenticated %}</span>
+    <ul class="topmenu hidden">
+      <li>how in works </li>
+      <li>settings</li>
+      <li>dashboard</li>
+      <li class="last">logout</li>
+    </ul>
+    <span class="hidden"> {% else %}</span>
+    <ul class="topmenu">
+      <li><A>how it works</A></li>
+      <li class="last"><a class="login">log in</a></li>
+    </ul>
+    <span class="hidden"> {% endif %}</span> </div>
+  <!-- end header --> 
+  <!-- content -->
+  <div class="content">{% block content %}{% endblock %}</div>
+  
+  <!-- end content --> 
+  
+  <!-- footer -->
+  <div class="footer">
+    <ul class="botmenu">
+      <li class="first"><a>how it works</a></li>
+      <li><a class="login">log in</a></li>
+      <li><a class="login register">Register</a></li>
+      <li class="github last"><a href="http://github.com">Github</a></li>
+    </ul>
+    <span class="copyright">&copy;2011<br />
+    <a href="http://djangodash.com/">Django Dash</a> participant</span> </div>
+  <!-- end footer --> 
+</div>
+</div>
+</body>
+</html>
